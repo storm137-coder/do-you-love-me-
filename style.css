@@ -1,0 +1,258 @@
+/* ========================================
+   CSS VARIABLES - Easy Customization
+   ======================================== */
+:root {
+    /* Colors */
+    --bg-color: #f5f5dc;
+    --yes-btn-color: #e74c3c;
+    --yes-btn-hover: #c0392b;
+    --no-btn-color: #e74c3c;
+    --no-btn-hover: #c0392b;
+    --text-color: #2c2c2c;
+
+    /* Sizes */
+    --btn-padding: 12px 40px;
+    --btn-font-size: 1.1rem;
+    --question-font-size: 2rem;
+    --result-font-size: 2rem;
+}
+
+/* ========================================
+   BASE STYLES & RESET
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
+.page {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Active page */
+.page.active {
+    display: flex;
+}
+
+/* Centered content */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* ========================================
+   IMAGE STYLES
+   ======================================== */
+.cute-image {
+    width: 250px;
+    max-width: 100%;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Result image */
+.result-image {
+    animation: fadeInScale 0.6s ease-out forwards,
+               float 3s ease-in-out 0.6s infinite;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.question-text {
+    font-size: var(--question-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.result-text {
+    font-size: var(--result-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    min-height: 60px;
+}
+
+.btn {
+    padding: var(--btn-padding);
+    font-size: var(--btn-font-size);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* YES button */
+.yes-btn {
+    background-color: var(--yes-btn-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.yes-btn:hover {
+    background-color: var(--yes-btn-hover);
+    transform: scale(1.05);
+}
+
+.yes-btn:active {
+    transform: scale(0.98);
+}
+
+/* NO button */
+.no-btn {
+    background-color: var(--no-btn-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.no-btn.escaping {
+    position: fixed;
+    z-index: 1000;
+}
+
+.no-btn:hover {
+    background-color: var(--no-btn-hover);
+}
+
+/* ========================================
+   PAGE 2
+   ======================================== */
+#page2 .content {
+    animation: pageSlideIn 0.5s ease-out;
+}
+
+@keyframes pageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .question-text,
+    .result-text {
+        font-size: 1.8rem;
+    }
+
+    .cute-image {
+        width: 200px;
+    }
+
+    .btn {
+        padding: 10px 35px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .question-text,
+    .result-text {
+        font-size: 1.5rem;
+    }
+
+    .cute-image {
+        width: 180px;
+    }
+
+    .buttons-container {
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 10px 30px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .question-text,
+    .result-text {
+        font-size: 1.3rem;
+    }
+
+    .cute-image {
+        width: 150px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .cute-image,
+    .result-image,
+    .result-text,
+    #page2 .content {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .btn {
+        transition: background-color 0.2s ease;
+    }
+}
